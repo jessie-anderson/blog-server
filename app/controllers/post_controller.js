@@ -16,7 +16,7 @@ export const createPost = (req, res) => {
 export const getPosts = (req, res) => {
   Post.find()
   .then(response => {
-    const cleanPosts = (posts) => {
+    const cleanPosts = () => {
       return response.map(post => {
         return { id: post.id, content: post.content, title: post.title, tags: post.tags };
       });
@@ -38,8 +38,13 @@ export const getPost = (req, res) => {
 };
 export const deletePost = (req, res) => {
   Post.findById(req.params.postId).remove(err => { console.log(err); });
-  res.send('delete a post here');
 };
 export const updatePost = (req, res) => {
+  const newPost = {
+    content: req.body.content,
+    title: req.body.title,
+    tags: req.body.tags,
+  };
+  Post.findById(req.params.postId).update({}, newPost);
   res.send('update a post here');
 };
