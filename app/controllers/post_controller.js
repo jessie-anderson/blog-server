@@ -45,6 +45,6 @@ export const updatePost = (req, res) => {
     title: req.body.title,
     tags: req.body.tags,
   };
-  Post.findById(req.params.postId).update({}, newPost);
+  console.log(Post.findById(req.params.postId));
   res.send('update a post here');
 };
