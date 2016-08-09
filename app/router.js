@@ -13,7 +13,7 @@ router.route('/posts')
 .get(Posts.getPosts);
 
 router.route('/posts/:postId')
-.post(Posts.updatePost)
+.put(Posts.updatePost)
 .get(Posts.getPost)
 .delete(Posts.deletePost);
 

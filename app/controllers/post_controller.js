@@ -37,14 +37,20 @@ export const getPost = (req, res) => {
   });
 };
 export const deletePost = (req, res) => {
-  Post.findById(req.params.postId).remove(err => { console.log(err); });
+  Post.findById(req.params.postId).remove(err => { res.json(err); });
 };
+
 export const updatePost = (req, res) => {
-  const newPost = {
+  const updatedPost = {
     content: req.body.content,
-    title: req.body.title,
     tags: req.body.tags,
+    title: req.body.title,
   };
-  console.log(Post.findById(req.params.postId));
-  res.send('update a post here');
+  Post.update({ _id: req.params.postId }, updatedPost)
+  .then(response => {
+    res.json(response);
+  })
+  .catch(err => {
+    res.json(err);
+  });
 };
