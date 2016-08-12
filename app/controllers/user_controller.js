@@ -23,9 +23,13 @@ export const signup = (req, res, next) => {
   }
 
   // check if user already exists with email
-  User.find({ email }).then(response => {
-    res.status(433).send('user already registered with that email');
-    return;
+  User.findOne({ email }).then(response => {
+    console.log('email already in use');
+    console.log(response);
+    if (response != null) {
+      res.status(433).send('user already registered with that email');
+      return;
+    }
   });
 
   const user = new User();
