@@ -34,7 +34,6 @@ export const getPost = (req, res) => {
   Post.findById(req.params.postId)
   .populate('author')
   .then(response => {
-    console.log(response);
     res.json(response);
   })
   .catch(error => {
