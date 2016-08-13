@@ -1,6 +1,7 @@
 import jwt from 'jwt-simple';
 import User from '../models/user_model';
-import config from '../config';
+import dotenv from 'dotenv';
+dotenv.config({ silent: true });
 
 export const signin = (req, res, next) => {
   const email = req.body.email;
@@ -48,5 +49,5 @@ export const signup = (req, res, next) => {
 // encodes a new token for a user object
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
-  return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+  return jwt.encode({ sub: user.id, iat: timestamp }, process.env.secret);
 }
