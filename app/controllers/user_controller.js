@@ -17,15 +17,14 @@ export const signin = (req, res, next) => {
 export const signup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  const username = req.body.username;
 
-  if (!email || !password) {
-    return res.status(422).send('You must provide email and password');
+  if (!email || !password || !username) {
+    return res.status(422).send('You must provide your name, email and password');
   }
 
   // check if user already exists with email
   User.findOne({ email }).then(response => {
-    console.log('email already in use');
-    console.log(response);
     if (response != null) {
       res.status(433).send('user already registered with that email');
       return;
@@ -35,6 +34,7 @@ export const signup = (req, res, next) => {
   const user = new User();
   user.email = email;
   user.password = password;
+  user.username = username;
   user.save()
   .then(result => {
     res.send({ token: tokenForUser(user) }); // return user token

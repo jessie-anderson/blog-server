@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt-nodejs';
 const UserSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
+  username: String,
 });
 
 // note use of named function rather than arrow notation
